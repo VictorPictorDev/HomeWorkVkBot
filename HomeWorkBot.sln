@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWorkBot", "HomeWorkBot\HomeWorkBot.csproj", "{6680E00A-1A3B-480B-B61C-F35E3DC1102B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bot", "Bot\Bot.csproj", "{612A5140-CCDA-4C60-A9A1-DD8737ACC150}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6680E00A-1A3B-480B-B61C-F35E3DC1102B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6680E00A-1A3B-480B-B61C-F35E3DC1102B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6680E00A-1A3B-480B-B61C-F35E3DC1102B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6680E00A-1A3B-480B-B61C-F35E3DC1102B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{612A5140-CCDA-4C60-A9A1-DD8737ACC150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{612A5140-CCDA-4C60-A9A1-DD8737ACC150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{612A5140-CCDA-4C60-A9A1-DD8737ACC150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{612A5140-CCDA-4C60-A9A1-DD8737ACC150}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8F04B4F-D4B4-4DCC-B0F8-8D9750B535E0}
+	EndGlobalSection
+EndGlobal
