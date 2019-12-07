@@ -9,7 +9,7 @@ using Bot.Commands;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model.Attachments;
 using VkNet.Model.Keyboard;
-using VkNet.Model.RequestParams;
+using Bot.Bl.Monitoring;
 namespace HomeWorkBot
 {
     class Program
@@ -35,7 +35,7 @@ namespace HomeWorkBot
         private static void MessageMonitoring_OnCommand(object sender, CommandEventArgs args)
         {
             var bot = (MessageMonitoring)sender;
-            var user = new DefualtUser(args.Message.FromId.Value);
+            var user = new AdminUser(args.Message.FromId.Value);
             bot.Commands.Execute(user,(Command)args.command, args.Label, args.parameters,args.Message);
         }
 

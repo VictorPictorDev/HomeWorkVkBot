@@ -44,7 +44,6 @@ namespace Bot.Bl
         public DefualtUser(long userid):base(userid)
         {
             Permissions.Add("commandpermission.defualt.info");
-            Permissions.Add("commandpermission.admin.addhomework");
             Permissions.Add("commandpermission.defualt.homework");
         }
     }
@@ -52,7 +51,9 @@ namespace Bot.Bl
     {
         public AdminUser(long userid):base(userid)
         {
-            Permissions.Add("");
+            Permissions.Add("commandpermission.admin.addhomework");
+            Permissions.Add("commandpermission.admin.edithomework");
+            Permissions.Add("commandpermission.admin.deletehomework");
         }
     }
 }

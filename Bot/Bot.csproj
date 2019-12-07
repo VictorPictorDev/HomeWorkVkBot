@@ -67,8 +67,11 @@
   <ItemGroup>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandList.cs" />
-    <Compile Include="Commands\CustomCommands\AddHomeWorkExecutor.cs" />
-    <Compile Include="Commands\CustomCommands\CheckHomeWorkExecutor.cs" />
+    <Compile Include="Commands\CustomCommands\HomeWorksCommands\AddHomeWorkExecutor.cs" />
+    <Compile Include="Commands\CustomCommands\HomeWorksCommands\CheckHomeWorkExecutor.cs" />
+    <Compile Include="Commands\CustomCommands\HomeWorksCommands\DeleteHomeWorkExecutor.cs" />
+    <Compile Include="Commands\CustomCommands\HomeWorksCommands\EditHomeWorkExecutor.cs" />
+    <Compile Include="Commands\CustomCommands\HomeWorksCommands\HomeWorkExecutorHelper.cs" />
     <Compile Include="Commands\CustomCommands\InfoExecutor.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandExecutor.cs" />
@@ -81,9 +84,9 @@
     <Compile Include="Bl\IPermission.cs" />
     <Compile Include="Bl\IReporter.cs" />
     <Compile Include="Bl\IUser.cs" />
-    <Compile Include="Bl\MessageMonitoring.cs" />
+    <Compile Include="Bl\Monitoring\MessageMonitoring.cs" />
     <Compile Include="Homework\HomeWork.cs" />
-    <Compile Include="Homework\HomeWorkList.cs" />
+    <Compile Include="Homework\HomeWorkHelper.cs" />
     <Compile Include="Homework\JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bl\VkApiHelper.cs" />

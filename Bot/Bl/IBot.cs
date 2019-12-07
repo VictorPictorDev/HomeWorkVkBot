@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using VkNet;
 using VkNet.Model;
-using VkNet.Model.RequestParams;
 using Bot.Commands;
+using Bot.Commands.CustomCommands.HomeWorksCommands;
+using Bot.Bl.Monitoring;
 using Bot.Commands.CustomCommands;
 namespace Bot.Bl
 {
@@ -38,9 +34,11 @@ namespace Bot.Bl
         private void InitCommand()
         {
             Commands.RegistryCommand(new Command("info","/info","Выводит помощь по доступным вам командам","commandpermission.defualt.info"),new InfoExecutor(Commands.Commands,helper));
-            Commands.RegistryCommand(new Command("addhomework","/addhomework текст дата(2019.11.26 - год,месяц, день)","Добавляет дз в базу","commandpermission.admin.addhomework"),new AddHomeWorkExecutor(helper,ErrorReporter));
+            Commands.RegistryCommand(new Command("addhomework","/addhomework <текст> <дата (26.11.2019 - год,месяц, день)>","Добавляет дз в базу","commandpermission.admin.addhomework"),new AddHomeWorkExecutor(helper,ErrorReporter));
             Commands.RegistryCommand(new Command("homework","/homework","Показывает домашнее задание на сегодня","commandpermission.defualt.homework"),new CheckHomeWorkExecutor(helper,ErrorReporter));
-            
+            Commands.RegistryCommand(new Command("edithomework", "/edithomework <дата (26.11.2019 - год,месяц, день)> <текст>", "Изменяет домашнее задание", "commandpermission.admin.edithomework"), new EditHomeWorkExecutor(helper, ErrorReporter));
+            Commands.RegistryCommand(new Command("deletehomework", "/deletehomework <дата (26.11.2019 - год,месяц, день)>", "Удаляет домашнее задание", "commandpermission.admin.deletehomework"), new DeleteHomeWorkExecutor(helper, ErrorReporter));
+            Commands.RegistryCommand(new Command("removehomework", "/removehomework <дата (26.11.2019 - год,месяц, день)>", "Удаляет домашнее задание", "commandpermission.admin.deletehomework"), new DeleteHomeWorkExecutor(helper, ErrorReporter));
         }
         public bool Auth(string Token)
         {
