@@ -21,10 +21,9 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 
                 if (homework.Date.DayOfWeek == DayOfWeek.Saturday || homework.Date.DayOfWeek == DayOfWeek.Sunday)
                 {
-                    Api.SendMessage($"Вы не можете установить домашнее задание на выходные ({homework.Date.ToShortDateString()}, {homework.Date.DayOfWeek})", sender.UserId);
+                    Api.SendMessage($"Вы не можете установить домашнее задание на выходные {homework.Date.ToShortDateString()}, {homework.Date.DayOfWeek})", sender.UserId);
                     return false;
                 }
-
                 HomeWorkHelper.GetHomeWorkList();
                 HomeWorkHelper.AppendHomeWork(homework);
                 HomeWorkHelper.UpdateJson();
@@ -33,7 +32,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
             }
             catch (Exception ex)
             {
-                Api.SendMessage("Что-то пошло не так! Проверьте правильность параметров команды.", sender.UserId);
+                Api.SendMessage(ExecutorText.ExepctionText, sender.UserId);
                 return false;
             }
         }

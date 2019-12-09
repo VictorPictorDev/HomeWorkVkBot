@@ -15,15 +15,12 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
     public class CheckHomeWorkExecutor:ICommandExecutor
     {
         public VkApiHelper Api;
-        private ExecutorText _text;
         private HomeWorkHelper HomeWorkHelper;
         public HomeWorkExecutorHelper HomeWorkExecutorHelper;
         public CheckHomeWorkExecutor(VkApiHelper helper,ErrorReporter reporter)
         {
             Api = helper;
             HomeWorkHelper = new HomeWorkHelper(reporter);
-            
-            _text = new ExecutorText();
             HomeWorkExecutorHelper = new HomeWorkExecutorHelper(Api, reporter);
         }
         private bool SendHomeWork(string datestr,BotUser sender)
@@ -33,14 +30,14 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 HomeWorkHelper.GetHomeWorkList();
                 if (HomeWorkHelper.HomeWorks == null)
                 {
-                    Api.SendMessage($"Извините, но список домашнего задания пуст!", sender.UserId);
+                    Api.SendMessage(ExecutorText.CheckHomeWorkExecutor.HomeWorkNull, sender.UserId);
                     return false;
                 }
                 var date = DateTime.ParseExact(datestr, Settings.Path.DateFormat, null);
                 var res = HomeWorkHelper.GetHomeWork(date);
                 if (res == null)
                 {
-                    Api.SendMessage($"Извините, но дз на {date.ToShortDateString()} ещё не добавлено!", sender.UserId);
+                    Api.SendMessage(ExecutorText.CheckHomeWorkExecutor.HomeWorkDoesntAdded, sender.UserId);
                     return false;
                 }
                 Api.SendMessage($"Дз на {res.Date.DayOfWeek.ToString().ToUpper()}({res.Date.ToShortDateString()}): \n\n"+res.Text, sender.UserId);
@@ -48,7 +45,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
             }
             catch (Exception ex)
             {
-                Api.SendMessage("Что-то пошло не так! Проверьте правильность параметров команды.", sender.UserId);
+                Api.SendMessage(ExecutorText.ExepctionText, sender.UserId);
                 return false;
             }
         }
@@ -72,7 +69,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                     return SendHomeWork(parameters[0],sender);
                 }
             }
-            Api.SendMessage(_text.CantPermission, sender.UserId);
+            Api.SendMessage(ExecutorText.CantPermission, sender.UserId);
             return false;
         }
 

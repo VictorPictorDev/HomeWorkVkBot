@@ -12,15 +12,13 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
 {
     public class AddHomeWorkExecutor : ICommandExecutor
     {
-        private ExecutorText _text;
         public VkApiHelper Api { get; private set; }
         public HomeWorkHelper HomeWorkHelper;
         public HomeWorkExecutorHelper HomeWorkExecutorHelper;
         public AddHomeWorkExecutor(VkApiHelper helper,ErrorReporter errorReporter)
         {
             Api = helper;
-            HomeWorkHelper = new HomeWorkHelper(errorReporter);
-            _text = new ExecutorText();
+            HomeWorkHelper = new HomeWorkHelper(errorReporter); 
             HomeWorkExecutorHelper = new HomeWorkExecutorHelper(Api, errorReporter);
         }
 
@@ -32,12 +30,12 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
               
                 if (parameters.Length<1)
                 {
-                    Api.SendMessage("Вы не вверли необходимый параметер(текст домашнего задания)",sender.UserId);
+                    Api.SendMessage(ExecutorText.AddHomeWorkExecutor.ParamTextError,sender.UserId);
                     return false;
                 }
                 if (parameters.Length<2)
                 {
-                    Api.SendMessage("Вы не вверли необходимый параметер(дату домашнего задания)", sender.UserId);
+                    Api.SendMessage(ExecutorText.AddHomeWorkExecutor.ParamDateError, sender.UserId);
                     return false;
                 }
                 var date = parameters[1];
@@ -47,14 +45,14 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 var h = HomeWorkHelper.GetHomeWork(homeworkdate);
                 if (h != null)
                 {
-                    Api.SendMessage($"Вы не можете добавить домашнее задание на один и тот же день({homeworkdate.ToShortDateString()}). Для этого есть команда редактирования домашнего задания /edithomework", sender.UserId);
+                    Api.SendMessage(ExecutorText.AddHomeWorkExecutor.CantAddedTwix, sender.UserId);
                     return false;
                 }
                 var homework = new HomeWork(text,sender.UserId,homeworkdate,VkMessage.Date.Value);
                 return HomeWorkExecutorHelper.AddHomeWork(homework,sender);
             }
             
-            Api.SendMessage(_text.CantPermission, sender.UserId);
+            Api.SendMessage(ExecutorText.CantPermission, sender.UserId);
             return false;
         }
     }

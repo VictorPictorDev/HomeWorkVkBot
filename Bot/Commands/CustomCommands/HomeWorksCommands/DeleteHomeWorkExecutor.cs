@@ -15,15 +15,12 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
     public class DeleteHomeWorkExecutor : ICommandExecutor
     {
         public VkApiHelper Api;
-        private ExecutorText _text;
         private HomeWorkHelper HomeWorkHelper;
         public HomeWorkExecutorHelper HomeWorkExecutorHelper;
         public DeleteHomeWorkExecutor(VkApiHelper helper, ErrorReporter reporter)
         {
             Api = helper;
             HomeWorkHelper = new HomeWorkHelper(reporter);
-
-            _text = new ExecutorText();
             HomeWorkExecutorHelper = new HomeWorkExecutorHelper(Api, reporter);
         }
         public bool Execute(BotUser sender, Command command, string Label, string[] parameters, Message VkMessage)
@@ -43,14 +40,17 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 var date = DateTime.ParseExact(datestr, Settings.Path.DateFormat, null);
                 HomeWorkHelper.GetHomeWorkList();
                 var res = HomeWorkHelper.GetHomeWork(date);
-                if (res != null)
+                if (res == null)
                 {
-                    HomeWorkHelper.RemoveHomeWork(res);
-                    HomeWorkHelper.UpdateJson();
+                    Api.SendMessage(ExecutorText.DeleteHomeWorkExecutor.ErrorDelete, sender.UserId);
+                    return false;
                 }
+                HomeWorkHelper.RemoveHomeWork(res);
+                HomeWorkHelper.UpdateJson();
+                Api.SendMessage(ExecutorText.DeleteHomeWorkExecutor.SuccessDelete, sender.UserId);
                 return true;
             }
-            Api.SendMessage(_text.CantPermission, sender.UserId);
+            Api.SendMessage(ExecutorText.CantPermission, sender.UserId);
             return false;
         }
     }

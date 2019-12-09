@@ -13,15 +13,12 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
     public class EditHomeWorkExecutor : ICommandExecutor
     {
         public VkApiHelper Api;
-        private ExecutorText _text;
         private HomeWorkHelper HomeWorkHelper;
         public HomeWorkExecutorHelper HomeWorkExecutorHelper;
         public EditHomeWorkExecutor(VkApiHelper helper, ErrorReporter reporter)
         {
             Api = helper;
             HomeWorkHelper = new HomeWorkHelper(reporter);
-
-            _text = new ExecutorText();
             HomeWorkExecutorHelper = new HomeWorkExecutorHelper(Api, reporter);
         }
         public bool Execute(BotUser sender, Command command, string Label, string[] parameters, Message VkMessage)
@@ -55,7 +52,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 var homework = new HomeWork(text, sender.UserId, date, VkMessage.Date.Value);
                 return HomeWorkExecutorHelper.AddHomeWork(homework, sender);
             }
-            Api.SendMessage(_text.CantPermission, sender.UserId);
+            Api.SendMessage(ExecutorText.CantPermission, sender.UserId);
             return false;
         }
     }

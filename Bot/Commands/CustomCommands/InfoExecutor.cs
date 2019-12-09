@@ -15,15 +15,12 @@ namespace Bot.Commands.CustomCommands
 {
     public class InfoExecutor : ICommandExecutor
     {
-        private ExecutorText _text;
         public List<ICommand> Command { get; private set; }
         public VkApiHelper Api { get; private set; }
         public InfoExecutor(List<ICommand> Command,Bot.Bl.VkApiHelper helper)
         {
             this.Command = Command;
             Api = helper;
-
-            _text = new ExecutorText();
         }
         public bool Execute(BotUser sender, Command command, string label, string[] parameters,Message VkMessage)
         {
@@ -33,7 +30,7 @@ namespace Bot.Commands.CustomCommands
                 {
                     return false;
                 }
-                var resualt = _text.InfoExecutor.InfoDescription;
+                var resualt = ExecutorText.InfoExecutor.InfoDescription;
                 foreach (Command cmd in Command)
                 {
                     if (sender.HasPermission(cmd.Permission))
@@ -44,7 +41,7 @@ namespace Bot.Commands.CustomCommands
                 Api.SendMessage(resualt,sender.UserId);
                 return true;
             }
-            Api.SendMessage(_text.CantPermission,sender.UserId);
+            Api.SendMessage(ExecutorText.CantPermission,sender.UserId);
             return false;
         }
     }
