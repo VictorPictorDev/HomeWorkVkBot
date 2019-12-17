@@ -1,6 +1,7 @@
 ﻿using Bot.Bl;
 using Bot.Config;
 using Bot.Homework;
+using Bot.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,14 +42,14 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 var date = parameters[1];
                 var text = parameters[0];
                 var homeworkdate = DateTime.ParseExact(date, Settings.Path.DateFormat, null); 
-                HomeWorkHelper.GetHomeWorkList();
-                var h = HomeWorkHelper.GetHomeWork(homeworkdate);
+                HomeWorkHelper.GetJsonItems();
+                var h = HomeWorkHelper.GetJsonItemByDate(homeworkdate);
                 if (h != null)
                 {
                     Api.SendMessage(ExecutorText.AddHomeWorkExecutor.CantAddedTwix, sender.UserId);
                     return false;
                 }
-                var homework = new HomeWork(text,sender.UserId,homeworkdate,VkMessage.Date.Value);
+                var homework = new JsonItem(text,sender.UserId,homeworkdate,VkMessage.Date.Value);
                 return HomeWorkExecutorHelper.AddHomeWork(homework,sender);
             }
             

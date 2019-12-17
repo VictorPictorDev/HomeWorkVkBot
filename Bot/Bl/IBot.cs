@@ -3,6 +3,8 @@ using VkNet;
 using VkNet.Model;
 using Bot.Commands;
 using Bot.Commands.CustomCommands.HomeWorksCommands;
+using Bot.Commands.CustomCommands.UserExecutors;
+using Bot.Commands.CustomCommands.SubscribeCommands;
 using Bot.Bl.Monitoring;
 using Bot.Commands.CustomCommands;
 namespace Bot.Bl
@@ -39,6 +41,7 @@ namespace Bot.Bl
             Commands.RegistryCommand(new Command("edithomework", "/edithomework <дата (26.11.2019 - год,месяц, день)> <текст>", "Изменяет домашнее задание", "commandpermission.admin.edithomework"), new EditHomeWorkExecutor(helper, ErrorReporter));
             Commands.RegistryCommand(new Command("deletehomework", "/deletehomework <дата (26.11.2019 - год,месяц, день)>", "Удаляет домашнее задание", "commandpermission.admin.deletehomework"), new DeleteHomeWorkExecutor(helper, ErrorReporter));
             Commands.RegistryCommand(new Command("removehomework", "/removehomework <дата (26.11.2019 - год,месяц, день)>", "Удаляет домашнее задание", "commandpermission.admin.deletehomework"), new DeleteHomeWorkExecutor(helper, ErrorReporter));
+            Commands.RegistryCommand(new Command("profile", "/profile", "Информация о вашем профиле", "commandpermission.defualt.profile"), new ProfileExecutor(helper));
         }
         public bool Auth(string Token)
         {

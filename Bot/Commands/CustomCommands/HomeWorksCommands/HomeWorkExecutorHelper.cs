@@ -2,6 +2,7 @@
 using Bot.Homework;
 using System;
 using Bot.Bl;
+using Bot.Json;
 
 namespace Bot.Commands.CustomCommands.HomeWorksCommands
 {
@@ -14,7 +15,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
             Api = helper;
             HomeWorkHelper = new HomeWorkHelper(reporter);
         }
-        public bool AddHomeWork(HomeWork homework,BotUser sender)
+        public bool AddHomeWork(JsonItem homework,BotUser sender)
         {
             try
             {
@@ -24,8 +25,8 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                     Api.SendMessage($"Вы не можете установить домашнее задание на выходные {homework.Date.ToShortDateString()}, {homework.Date.DayOfWeek})", sender.UserId);
                     return false;
                 }
-                HomeWorkHelper.GetHomeWorkList();
-                HomeWorkHelper.AppendHomeWork(homework);
+                HomeWorkHelper.GetJsonItems();
+                HomeWorkHelper.Append(homework);
                 HomeWorkHelper.UpdateJson();
                 Api.SendMessage($"Домашнее задание успешно добавлено на дату {homework.Date.ToShortDateString()} ", sender.UserId);
                 return true;
@@ -38,7 +39,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
         }
         public bool GetAllHomeWork(BotUser sender)
         {
-            HomeWorkHelper.GetHomeWorkList();
+            HomeWorkHelper.GetJsonItems();
             if (HomeWorkHelper.HomeWorks == null)
             {
                 Api.SendMessage("Список домашних заданий пуст", sender.UserId);

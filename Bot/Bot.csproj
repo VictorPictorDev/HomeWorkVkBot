@@ -65,6 +65,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bl\Monitoring\Distribution.cs" />
+    <Compile Include="Commands\CustomCommands\SubscribeCommands\SubscribeExecutor.cs" />
+    <Compile Include="Commands\CustomCommands\SubscribeCommands\UnSubscribeExecutor.cs" />
+    <Compile Include="Commands\CustomCommands\UserExecutors\ProfileExecutor.cs" />
+    <Compile Include="Database\BotUserDb.cs" />
+    <Compile Include="Json\IJsonItemHelper.cs" />
+    <Compile Include="Json\JsonItem.cs" />
+    <Compile Include="Bl\Monitoring\DateTimeActionTimer.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandList.cs" />
     <Compile Include="Commands\CustomCommands\HomeWorksCommands\AddHomeWorkExecutor.cs" />
@@ -72,7 +80,7 @@
     <Compile Include="Commands\CustomCommands\HomeWorksCommands\DeleteHomeWorkExecutor.cs" />
     <Compile Include="Commands\CustomCommands\HomeWorksCommands\EditHomeWorkExecutor.cs" />
     <Compile Include="Commands\CustomCommands\HomeWorksCommands\HomeWorkExecutorHelper.cs" />
-    <Compile Include="Commands\CustomCommands\InfoExecutor.cs" />
+    <Compile Include="Commands\CustomCommands\UserExecutors\InfoExecutor.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandExecutor.cs" />
     <Compile Include="Commands\ICommandList.cs" />
@@ -87,7 +95,7 @@
     <Compile Include="Bl\Monitoring\MessageMonitoring.cs" />
     <Compile Include="Homework\HomeWork.cs" />
     <Compile Include="Homework\HomeWorkHelper.cs" />
-    <Compile Include="Homework\JsonHelper.cs" />
+    <Compile Include="Json\JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bl\VkApiHelper.cs" />
     <Compile Include="Bl\VkBotSettings.cs" />

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Bot.Bl;
 using Bot.Config;
 using Bot.Homework;
+using Bot.Json;
 using VkNet.Model;
 
 namespace Bot.Commands.CustomCommands.HomeWorksCommands
@@ -42,14 +43,14 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 var datestr = parameters[0];
                 var text = parameters[1];
                 var date = DateTime.ParseExact(datestr, Settings.Path.DateFormat, null);
-                HomeWorkHelper.GetHomeWorkList();
-                var res = HomeWorkHelper.GetHomeWork(date);
+                HomeWorkHelper.GetJsonItems();
+                var res = HomeWorkHelper.GetJsonItemByDate(date);
                 if (res != null)
                 {
-                    HomeWorkHelper.RemoveHomeWork(res);
+                    HomeWorkHelper.Remove(res);
                     HomeWorkHelper.UpdateJson();
                 }
-                var homework = new HomeWork(text, sender.UserId, date, VkMessage.Date.Value);
+                var homework = new JsonItem(text, sender.UserId, date, VkMessage.Date.Value);
                 return HomeWorkExecutorHelper.AddHomeWork(homework, sender);
             }
             Api.SendMessage(ExecutorText.CantPermission, sender.UserId);

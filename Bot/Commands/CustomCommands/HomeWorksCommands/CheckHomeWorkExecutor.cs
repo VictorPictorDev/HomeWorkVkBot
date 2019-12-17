@@ -27,14 +27,14 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
         {
             try
             {
-                HomeWorkHelper.GetHomeWorkList();
+                HomeWorkHelper.GetJsonItems();
                 if (HomeWorkHelper.HomeWorks == null)
                 {
                     Api.SendMessage(ExecutorText.CheckHomeWorkExecutor.HomeWorkNull, sender.UserId);
                     return false;
                 }
                 var date = DateTime.ParseExact(datestr, Settings.Path.DateFormat, null);
-                var res = HomeWorkHelper.GetHomeWork(date);
+                var res = HomeWorkHelper.GetJsonItemByDate(date);
                 if (res == null)
                 {
                     Api.SendMessage(ExecutorText.CheckHomeWorkExecutor.HomeWorkDoesntAdded, sender.UserId);

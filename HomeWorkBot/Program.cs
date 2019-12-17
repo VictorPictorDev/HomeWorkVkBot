@@ -10,6 +10,8 @@ using VkNet.Enums.SafetyEnums;
 using VkNet.Model.Attachments;
 using VkNet.Model.Keyboard;
 using Bot.Bl.Monitoring;
+using Bot.Database;
+
 namespace HomeWorkBot
 {
     class Program
@@ -21,6 +23,14 @@ namespace HomeWorkBot
             bot.MessageMonitoring.OnCommand += MessageMonitoring_OnCommand;
             bot.MessageMonitoring.OnCommandNotFound += MessageMonitoring_OnCommandNotFound;
             bot.Run();
+            //var monitoring = new DateTimeActionTimer(new DateTime(2019,12,9,17,04,10),60*1000,false);
+            //monitoring.Tick += Monitoring_Tick;
+            //monitoring.Start();
+        }
+
+        private static void Monitoring_Tick(object sender, EventArgs e)
+        {
+            Console.WriteLine("IT`S WORK!");
         }
 
         private static void MessageMonitoring_OnCommandNotFound(object sender, CommandEventArgs args)
@@ -35,14 +45,33 @@ namespace HomeWorkBot
         private static void MessageMonitoring_OnCommand(object sender, CommandEventArgs args)
         {
             var bot = (MessageMonitoring)sender;
-            var user = new AdminUser(args.Message.FromId.Value);
+            var database = new DatabaseHelper(bot.Helper);
+            BotUser user = new DefualtUser(args.Message.FromId.Value);
+            if (!database.IssetUser(user))
+            {
+                database.AddUser(user);
+            }
+            else
+            {
+                user = database.GetUserById(args.Message.FromId.Value);
+            }
             bot.Commands.Execute(user,(Command)args.command, args.Label, args.parameters,args.Message);
         }
 
         private static void MessageMonitoring_NewMessage(object sender, NewMessageEventArgs args)
         {
             var bot = (MessageMonitoring)sender;
-            bot.Helper.SendMessage("Привет, друг",args.Message.FromId.Value);
+            var database = new DatabaseHelper(bot.Helper);
+            BotUser user = new DefualtUser(args.Message.FromId.Value);
+            if (!database.IssetUser(user))
+            {
+                database.AddUser(user);
+            }
+            else
+            {
+                user = database.GetUserById(args.Message.FromId.Value);
+            }
+            bot.Helper.SendMessage("Привет, друг",user.UserId);
         }
     }
 }

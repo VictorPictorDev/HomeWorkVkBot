@@ -38,14 +38,14 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 }
                 var datestr = parameters[0];
                 var date = DateTime.ParseExact(datestr, Settings.Path.DateFormat, null);
-                HomeWorkHelper.GetHomeWorkList();
-                var res = HomeWorkHelper.GetHomeWork(date);
+                HomeWorkHelper.GetJsonItems();
+                var res = HomeWorkHelper.GetJsonItemByDate(date);
                 if (res == null)
                 {
                     Api.SendMessage(ExecutorText.DeleteHomeWorkExecutor.ErrorDelete, sender.UserId);
                     return false;
                 }
-                HomeWorkHelper.RemoveHomeWork(res);
+                HomeWorkHelper.Remove(res);
                 HomeWorkHelper.UpdateJson();
                 Api.SendMessage(ExecutorText.DeleteHomeWorkExecutor.SuccessDelete, sender.UserId);
                 return true;

@@ -14,9 +14,13 @@ namespace Bot.Bl
     {
         public long UserId { get; private set; }
         public List<string> Permissions { get; private set; } = new List<string>();
-        public BotUser(long userid)
+        public bool IsSubscribe;
+        public int Coins;
+        public BotUser(long userid,int coins,bool issubscribe)
         {
             UserId = userid;
+            IsSubscribe = issubscribe;
+            Coins = coins;
         }
         public virtual User GetInfo(VkApi api,ProfileFields fields,NameCase nameCase)
         {
@@ -41,19 +45,29 @@ namespace Bot.Bl
     }
     public class DefualtUser : BotUser
     {
-        public DefualtUser(long userid):base(userid)
+        public DefualtUser(long userid,int coins=0,bool IsSubscribe=false):base(userid,coins,IsSubscribe)
         {
             Permissions.Add("commandpermission.defualt.info");
             Permissions.Add("commandpermission.defualt.homework");
+            Permissions.Add("commandpermission.defualt.profile");
+        }
+
+        public override string ToString()
+        {
+            return this.GetType().Name;
         }
     }
     public class AdminUser : DefualtUser
     {
-        public AdminUser(long userid):base(userid)
+        public AdminUser(long userid, int coins = 0, bool IsSubscribe = false) :base(userid,coins,IsSubscribe)
         {
             Permissions.Add("commandpermission.admin.addhomework");
             Permissions.Add("commandpermission.admin.edithomework");
             Permissions.Add("commandpermission.admin.deletehomework");
+        }
+        public override string ToString()
+        {
+            return this.GetType().Name;
         }
     }
 }

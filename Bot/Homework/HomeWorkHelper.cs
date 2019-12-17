@@ -5,28 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using Bot.Bl;
 using Bot.Config;
+using Bot.Json;
 using VkNet.Model.Attachments;
 namespace Bot.Homework
 {
-    public class HomeWorkHelper
+    public class HomeWorkHelper:IJsonItemHelper
     {
-        public List<HomeWork> HomeWorks;
+        public static List<JsonItem> HomeWorks;
         public ErrorReporter ErrorReporter;
         public HomeWorkHelper(ErrorReporter errorReporter)
         {
-            HomeWorks = new List<HomeWork>();
+            HomeWorks = new List<JsonItem>();
             ErrorReporter = errorReporter;
         }
-        public void GetHomeWorkList()
+        public void GetJsonItems()
         {
             
-            var res = JsonHelper.Get<List<HomeWork>>(Settings.Path.HomeWorkPath);
+            var res = JsonHelper.Get<List<JsonItem>>(Settings.Path.HomeWorkPath);
             if (res != null)
             {
                 HomeWorks = res;
             }
         }
-        public HomeWork GetHomeWork(DateTime date)
+        public JsonItem GetJsonItemByDate(DateTime date)
         {
             if (HomeWorks != null)
             {
@@ -40,7 +41,7 @@ namespace Bot.Homework
             }
             return null;
         }
-        public void AppendHomeWork(HomeWork homeWork)
+        public void Append(JsonItem homeWork)
         {
             if (HomeWorks.Count < 5)
             {
@@ -51,7 +52,7 @@ namespace Bot.Homework
                 ErrorReporter.Reporter(new ArgumentException("В дз не может быть больше 5 элементов"));
             }
         }
-        public void RemoveHomeWork(HomeWork homeWork)
+        public void Remove(JsonItem homeWork)
         {
             HomeWorks.Remove(homeWork);
         }

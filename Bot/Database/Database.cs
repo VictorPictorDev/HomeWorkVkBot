@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using Bot.Config;
 namespace Bot.Database
 {
-    public class Database
+    public class DataBase
     {
-            private static Database instance;
+            private static DataBase instance;
             public SqlConnection Connection;
             private static object syncRoot = new Object();
 
-            protected Database()
+            protected DataBase()
             {
                 IDatabaseBuilder builder = new DatabaseBuilder();
                 builder.SetDatasource(Settings.Db.DataSource);
@@ -21,14 +21,14 @@ namespace Bot.Database
                 Connection = builder.Build();
             }
 
-            public static Database getInstance()
+            public static DataBase getInstance()
             {
                 if (instance == null)
                 {
                     lock (syncRoot)
                     {
                         if (instance == null)
-                            instance = new Database();
+                            instance = new DataBase();
                     }
                 }
                 return instance;
@@ -54,22 +54,22 @@ namespace Bot.Database
         }
         public void SetDatasource(string text)
         {
-            ConnStr = @"Data Source=" + text + ";";
+            ConnStr += "Data Source=" + text + ";";
         }
 
         public void SetDatabase(string text)
         {
-            ConnStr = "Initial Catalog = " + text + ";";
+            ConnStr += "Initial Catalog=" + text + ";";
         }
 
         public void SetUsername(string text)
         {
-            ConnStr = "User ID = " + text + ";";
+            ConnStr += "User ID=" + text + ";";
         }
 
         public void SetPassword(string text)
         {
-            ConnStr = "Password = " + text +";";
+            ConnStr += "Password=" + text +";";
         }
 
         public void Reset()
@@ -79,7 +79,7 @@ namespace Bot.Database
 
         public SqlConnection Build()
         {
-            ConnStr += "Integrated Security=True;";
+            ConnStr += "Integrated Security=True";
             SqlConnection temp = resualt;
             resualt.ConnectionString = ConnStr;
             Reset();
@@ -88,7 +88,7 @@ namespace Bot.Database
 
         public void SetAttachDbFileName(string Text)
         {
-            ConnStr = "AttachDbFilename = " + Text + ";";
+            ConnStr += "AttachDbFilename = " + Text + ";";
         }
     }
 }
