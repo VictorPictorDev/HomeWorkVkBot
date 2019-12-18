@@ -21,6 +21,19 @@ namespace Bot.Commands.CustomCommands.SubscribeCommands
         {
             if (sender.HasPermission(command.Permission))
             {
+                var databasehelper = new DatabaseHelper(Api);
+                if (sender.IsSubscribe)
+                {
+                    sender.IsSubscribe = false;
+                    databasehelper.UpdateUser(sender);
+                    Api.SendMessage("Вы успешно отписались от рассылки домашних заданий!", sender.UserId);
+                    return true;
+                }
+                else
+                {
+                    Api.SendMessage("Вы не можете отписаться от рассылки домашних заданий, так как вы не подписаны!", sender.UserId);
+                    return false;
+                }
             }
 
             Api.SendMessage(ExecutorText.CantPermission, sender.UserId);

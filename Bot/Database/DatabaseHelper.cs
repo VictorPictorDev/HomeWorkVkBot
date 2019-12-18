@@ -95,7 +95,11 @@ namespace Bot.Database
         }
         public bool UpdateUser(BotUser user)
         {
-            var sqlcommand = new SqlCommand($"UPDATE {Settings.Db.TableName} SET {Settings.Db.VkUserId}={user.UserId}, IsSubscribe={user.IsSubscribe}, Coins={user.Coins},Privilege={user} WHERE {Settings.Db.VkUserId}={user.UserId}", Connection);
+            var sqlcommand = new SqlCommand($"UPDATE {Settings.Db.TableName} SET {Settings.Db.VkUserId}=@UserId, IsSubscribe=@IsSubscribe, Coins=@Coins,Privilege=@Privilege WHERE {Settings.Db.VkUserId}=@UserId", Connection);
+            sqlcommand.Parameters.AddWithValue("@UserId", user.UserId);
+            sqlcommand.Parameters.AddWithValue("@IsSubscribe", Convert.ToInt32(user.IsSubscribe));
+            sqlcommand.Parameters.AddWithValue("@Coins", user.Coins);
+            sqlcommand.Parameters.AddWithValue("@Privilege", user.ToString());
             try
             {
                 Connection.Open();

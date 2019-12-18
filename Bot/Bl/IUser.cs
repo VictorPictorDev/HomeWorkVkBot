@@ -50,6 +50,8 @@ namespace Bot.Bl
             Permissions.Add("commandpermission.defualt.info");
             Permissions.Add("commandpermission.defualt.homework");
             Permissions.Add("commandpermission.defualt.profile");
+            Permissions.Add("commandpermission.defualt.subscribe");
+            Permissions.Add("commandpermission.defualt.unsubscribe");
         }
 
         public override string ToString()

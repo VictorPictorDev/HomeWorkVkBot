@@ -42,6 +42,8 @@ namespace Bot.Bl
             Commands.RegistryCommand(new Command("deletehomework", "/deletehomework <дата (26.11.2019 - год,месяц, день)>", "Удаляет домашнее задание", "commandpermission.admin.deletehomework"), new DeleteHomeWorkExecutor(helper, ErrorReporter));
             Commands.RegistryCommand(new Command("removehomework", "/removehomework <дата (26.11.2019 - год,месяц, день)>", "Удаляет домашнее задание", "commandpermission.admin.deletehomework"), new DeleteHomeWorkExecutor(helper, ErrorReporter));
             Commands.RegistryCommand(new Command("profile", "/profile", "Информация о вашем профиле", "commandpermission.defualt.profile"), new ProfileExecutor(helper));
+            Commands.RegistryCommand(new Command("subscribe", "/subscribe", "Подписка на рассылку дз", "commandpermission.defualt.subscribe"), new SubscribeExecutor(helper));
+            Commands.RegistryCommand(new Command("unsubscribe", "/unsubscribe", "Отписка от рассылки дз", "commandpermission.defualt.unsubscribe"), new UnSubscribeExecutor(helper));
         }
         public bool Auth(string Token)
         {
