@@ -11,6 +11,7 @@ using VkNet.Model.Attachments;
 using VkNet.Model.Keyboard;
 using Bot.Bl.Monitoring;
 using Bot.Database;
+using VkNet.Enums.Filters;
 
 namespace HomeWorkBot
 {
@@ -18,7 +19,7 @@ namespace HomeWorkBot
     {
         static void Main(string[] args)
         {
-            var bot = new VkBot(Settings.Bot.Token, new Random(), Settings.Bot.GroupId, new ErrorReporter((ex) => { Console.WriteLine(ex.Message); }));
+            var bot = new VkBot(Bot.Config.Settings.Bot.Token, new Random(), Bot.Config.Settings.Bot.GroupId, new ErrorReporter((ex) => { Console.WriteLine(ex.Message); }));
             bot.MessageMonitoring.NewMessage += MessageMonitoring_NewMessage;
             bot.MessageMonitoring.OnCommand += MessageMonitoring_OnCommand;
             bot.MessageMonitoring.OnCommandNotFound += MessageMonitoring_OnCommandNotFound;
@@ -71,7 +72,7 @@ namespace HomeWorkBot
             {
                 user = database.GetUserById(args.Message.FromId.Value);
             }
-            bot.Helper.SendMessage("Привет, друг",user.UserId);
+            bot.Helper.SendMessage($"Привет, акулёнок {user.GetInfo(bot.Helper.Api,ProfileFields.FirstName,NameCase.Nom).FirstName}. Данный бот создан для рассылки домашних заданий. В данном боте очень много комманд чтобы посмотреть все напиши /info.",user.UserId);
         }
     }
 }

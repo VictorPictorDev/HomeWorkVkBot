@@ -26,6 +26,7 @@ namespace Bot.Commands.CustomCommands.UserExecutors
                 resualt += $"Баланс: {sender.Coins} эмигриун\n";
                 resualt += $"Подписаны ли вы на рассылку домашних заданий: {sender.IsSubscribe}\n";
                 Api.SendMessage(resualt, sender.UserId);
+                return true;
             }
             Api.SendMessage(ExecutorText.CantPermission, sender.UserId);
             return false;

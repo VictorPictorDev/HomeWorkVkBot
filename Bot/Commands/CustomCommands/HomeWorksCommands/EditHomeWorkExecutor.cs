@@ -8,6 +8,7 @@ using Bot.Config;
 using Bot.Homework;
 using Bot.Json;
 using VkNet.Model;
+using VkNet.Model.Attachments;
 
 namespace Bot.Commands.CustomCommands.HomeWorksCommands
 {
@@ -50,7 +51,15 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                     HomeWorkHelper.Remove(res);
                     HomeWorkHelper.UpdateJson();
                 }
-                var homework = new JsonItem(text, sender.UserId, date, VkMessage.Date.Value);
+                var list = new List<Photo>();
+                foreach (var a in VkMessage.Attachments)
+                {
+                    if (a.Instance is Photo)
+                    {
+                        list.Add((Photo)a.Instance);
+                    }
+                }
+                var homework = new JsonItem(text, sender.UserId, date, VkMessage.Date.Value,list);
                 return HomeWorkExecutorHelper.AddHomeWork(homework, sender);
             }
             Api.SendMessage(ExecutorText.CantPermission, sender.UserId);

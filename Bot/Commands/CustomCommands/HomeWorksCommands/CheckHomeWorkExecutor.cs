@@ -41,6 +41,10 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                     return false;
                 }
                 Api.SendMessage($"Дз на {res.Date.DayOfWeek.ToString().ToUpper()}({res.Date.ToShortDateString()}): \n\n"+res.Text, sender.UserId);
+                if (res.Attachments != null&&res.Attachments.Count>0)
+                {
+                    Api.SendMessage("", sender.UserId, res.Attachments.ToList<MediaAttachment>());
+                }
                 return true;
             }
             catch (Exception ex)

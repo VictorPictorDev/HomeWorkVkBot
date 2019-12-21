@@ -24,7 +24,7 @@ namespace Bot.Bl
         }
         public virtual User GetInfo(VkApi api,ProfileFields fields,NameCase nameCase)
         {
-            var res = api.Users.Get(new long[] { UserId},fields,nameCase,false);
+            var res = api.Users.Get(new long[] { UserId},fields,nameCase,true);
             if (res == null)
             {
                 return null;

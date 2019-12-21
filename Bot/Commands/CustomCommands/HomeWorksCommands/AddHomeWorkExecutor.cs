@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VkNet.Model;
+using VkNet.Model.Attachments;
 
 namespace Bot.Commands.CustomCommands.HomeWorksCommands
 {
@@ -49,7 +50,15 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                     Api.SendMessage(ExecutorText.AddHomeWorkExecutor.CantAddedTwix, sender.UserId);
                     return false;
                 }
-                var homework = new JsonItem(text,sender.UserId,homeworkdate,VkMessage.Date.Value);
+               var list = new List<Photo>();
+                foreach(var a in VkMessage.Attachments)
+                {
+                    if(a.Instance is Photo)
+                    {
+                        list.Add((Photo)a.Instance);
+                    }
+                }
+                var homework = new JsonItem(text,sender.UserId,homeworkdate,VkMessage.Date.Value,list);
                 return HomeWorkExecutorHelper.AddHomeWork(homework,sender);
             }
             
