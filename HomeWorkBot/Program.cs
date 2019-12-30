@@ -48,13 +48,13 @@ namespace HomeWorkBot
             var bot = (MessageMonitoring)sender;
             var database = new DatabaseHelper(bot.Helper);
             BotUser user = new DefualtUser(args.Message.FromId.Value);
-            if (!database.IssetUser(user))
+            if (!database.IssetUser(user).Result)
             {
                 database.AddUser(user);
             }
             else
             {
-                user = database.GetUserById(args.Message.FromId.Value);
+                user = database.GetUserById(args.Message.FromId.Value).Result;
             }
             bot.Commands.Execute(user,(Command)args.command, args.Label, args.parameters,args.Message);
         }
@@ -64,13 +64,13 @@ namespace HomeWorkBot
             var bot = (MessageMonitoring)sender;
             var database = new DatabaseHelper(bot.Helper);
             BotUser user = new DefualtUser(args.Message.FromId.Value);
-            if (!database.IssetUser(user))
+            if (!database.IssetUser(user).Result)
             {
                 database.AddUser(user);
             }
             else
             {
-                user = database.GetUserById(args.Message.FromId.Value);
+                user = database.GetUserById(args.Message.FromId.Value).Result;
             }
             bot.Helper.SendMessage($"Привет, акулёнок {user.GetInfo(bot.Helper.Api,ProfileFields.FirstName,NameCase.Nom).FirstName}. Данный бот создан для рассылки домашних заданий. В данном боте очень много комманд чтобы посмотреть все напиши /info.",user.UserId);
         }

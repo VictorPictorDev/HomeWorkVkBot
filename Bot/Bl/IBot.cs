@@ -7,6 +7,8 @@ using Bot.Commands.CustomCommands.UserExecutors;
 using Bot.Commands.CustomCommands.SubscribeCommands;
 using Bot.Bl.Monitoring;
 using Bot.Commands.CustomCommands;
+using Bot.Commands.CustomCommands.ShopCommands;
+
 namespace Bot.Bl
 {
     public interface IVkBot
@@ -44,6 +46,8 @@ namespace Bot.Bl
             Commands.RegistryCommand(new Command("profile", "/profile", "Информация о вашем профиле", "commandpermission.defualt.profile"), new ProfileExecutor(helper));
             Commands.RegistryCommand(new Command("subscribe", "/subscribe", "Подписка на рассылку дз", "commandpermission.defualt.subscribe"), new SubscribeExecutor(helper));
             Commands.RegistryCommand(new Command("unsubscribe", "/unsubscribe", "Отписка от рассылки дз", "commandpermission.defualt.unsubscribe"), new UnSubscribeExecutor(helper));
+            Commands.RegistryCommand(new Command("shopitem", "/shopitem <подкоманды> <параметры подкоманды...>", "Управление магазином", "commandpermission.admin.shopitem"), new ShopItemExecutor(helper));
+            Commands.RegistryCommand(new Command("shop", "/shop", "Магазин домашних заданий", "commandpermission.defualt.shop"), new ShopExecutor(helper));
         }
         public bool Auth(string Token)
         {

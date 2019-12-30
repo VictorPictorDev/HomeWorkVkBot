@@ -19,17 +19,17 @@ namespace Bot.Database
             Helper = helper;
             Connection = DataBase.getInstance().Connection;
         }
-        public bool IssetUser(long UserId)
+        public async Task<bool> IssetUser(long UserId)
         {
             var user = new DefualtUser(UserId);
-            return IssetUser(user);
+            return await IssetUser(user);
         }
-        public BotUser GetUserById(long Id)
+        public async Task<BotUser> GetUserById(long Id)
         {
             var query = new SqlCommand($"SELECT * FROM {Settings.Db.TableName} WHERE({Settings.Db.VkUserId})={Id} ", Connection);
             try
             {
-                Connection.Open();
+                await Connection.OpenAsync();
                 using (SqlDataReader reader = query.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -67,12 +67,12 @@ namespace Bot.Database
                 Connection.Close();
             }
         }
-        public bool IssetUser(BotUser user)
+        public async Task<bool> IssetUser(BotUser user)
         {
             var query = new SqlCommand($"SELECT COUNT(*) FROM {Settings.Db.TableName} WHERE({Settings.Db.VkUserId})={ user.UserId} ",Connection);
             try
             {
-                Connection.Open();
+                await Connection.OpenAsync();
                 var res = (int)query.ExecuteScalar();
                 if(res == default(int))
                 {
@@ -93,7 +93,7 @@ namespace Bot.Database
                 Connection.Close();
             }
         }
-        public bool UpdateUser(BotUser user)
+        public async Task<bool> UpdateUser(BotUser user)
         {
             var sqlcommand = new SqlCommand($"UPDATE {Settings.Db.TableName} SET {Settings.Db.VkUserId}=@UserId, IsSubscribe=@IsSubscribe, Coins=@Coins,Privilege=@Privilege WHERE {Settings.Db.VkUserId}=@UserId", Connection);
             sqlcommand.Parameters.AddWithValue("@UserId", user.UserId);
@@ -102,7 +102,7 @@ namespace Bot.Database
             sqlcommand.Parameters.AddWithValue("@Privilege", user.ToString());
             try
             {
-                Connection.Open();
+                await Connection.OpenAsync();
                 sqlcommand.ExecuteNonQuery();
                 return true;
             }
@@ -116,7 +116,7 @@ namespace Bot.Database
                 Connection.Close();
             }
         }
-        public bool AddUser(BotUser user)
+        public async Task<bool> AddUser(BotUser user)
         {
             var sqlcommand = new SqlCommand($"INSERT INTO {Settings.Db.TableName} ({Settings.Db.VkUserId}, IsSubscribe, Coins,Privilege) VALUES (@UserId,@IsSubscribe,@Coins,@Privilege)", Connection);
             sqlcommand.Parameters.AddWithValue("@UserId", user.UserId);
@@ -125,7 +125,7 @@ namespace Bot.Database
             sqlcommand.Parameters.AddWithValue("@Privilege", user.ToString());
             try
             {
-                Connection.Open();
+                await Connection.OpenAsync();
                 sqlcommand.ExecuteNonQuery();
                 return true;
             }
@@ -139,12 +139,12 @@ namespace Bot.Database
                 Connection.Close();
             }
         }
-        public bool RemoveUser(BotUser user)
+        public async Task<bool> RemoveUser(BotUser user)
         {
             var removeuser = new SqlCommand($"DELETE FROM {Settings.Db.TableName} WHERE {Settings.Db.VkUserId}={user.UserId}", Connection);
             try
             {
-                Connection.Open();
+                await Connection.OpenAsync();
                 int res = removeuser.ExecuteNonQuery();
                 if (res == default(int))
                 {

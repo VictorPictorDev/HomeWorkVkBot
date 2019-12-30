@@ -14,6 +14,14 @@ namespace Bot.Json
             try
             {
                 var json = File.ReadAllText(Path);
+
+                DirectoryInfo dirInfo = new DirectoryInfo(Path.Substring(0, Path.LastIndexOf("/")));
+                if (!dirInfo.Exists)
+                {
+                    dirInfo.Create();
+                }
+
+
                 return JsonConvert.DeserializeObject<T1>(json);
 
             }
@@ -27,6 +35,13 @@ namespace Bot.Json
             try
             {
                 var json = JsonConvert.SerializeObject(Obj);
+
+                DirectoryInfo dirInfo = new DirectoryInfo(Path.Substring(0,Path.LastIndexOf("/")));
+                if (!dirInfo.Exists)
+                {
+                    dirInfo.Create();
+                }
+
                 File.WriteAllText(Path, json);
                 return true;
             }
@@ -36,4 +51,5 @@ namespace Bot.Json
             }
         }
     }
+
 }

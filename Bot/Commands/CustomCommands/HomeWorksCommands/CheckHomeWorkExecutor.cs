@@ -45,6 +45,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 {
                     Api.SendMessage("", sender.UserId, res.Attachments.ToList<MediaAttachment>());
                 }
+                HomeWorkHelper.ClearData();
                 return true;
             }
             catch (Exception ex)

@@ -9,7 +9,7 @@ using Bot.Json;
 using VkNet.Model.Attachments;
 namespace Bot.Homework
 {
-    public class HomeWorkHelper:IJsonItemHelper
+    public class HomeWorkHelper:IJsonItemHelper<JsonItem>
     {
         public static List<JsonItem> HomeWorks;
         public ErrorReporter ErrorReporter;
@@ -59,6 +59,15 @@ namespace Bot.Homework
         public bool UpdateJson()
         {
             return JsonHelper.Set(Settings.Path.HomeWorkPath,HomeWorks);
+        }
+
+        public void ClearData()
+        {
+            if (HomeWorks == null || HomeWorks.Count <= 0)
+            {
+                return;
+            }
+            HomeWorks.Clear();
         }
     }
 }

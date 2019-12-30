@@ -28,6 +28,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 HomeWorkHelper.GetJsonItems();
                 HomeWorkHelper.Append(homework);
                 HomeWorkHelper.UpdateJson();
+                HomeWorkHelper.ClearData();
                 Api.SendMessage($"Домашнее задание успешно добавлено на дату {homework.Date.ToShortDateString()} ", sender.UserId);
                 return true;
             }
@@ -60,6 +61,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 }
                 resualt+=$"Номер [{i}] - {shortText}... , дата {h.PostDate.ToShortDateString()}\n";
             }
+            HomeWorkHelper.ClearData();
             Api.SendMessage(resualt, sender.UserId);
             return true;
         }

@@ -47,6 +47,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                 }
                 HomeWorkHelper.Remove(res);
                 HomeWorkHelper.UpdateJson();
+                HomeWorkHelper.ClearData();
                 Api.SendMessage(ExecutorText.DeleteHomeWorkExecutor.SuccessDelete, sender.UserId);
                 return true;
             }

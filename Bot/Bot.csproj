@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bl\Monitoring\Distribution.cs" />
+    <Compile Include="Commands\CustomCommands\ShopCommands\ShopExecutor.cs" />
+    <Compile Include="Commands\CustomCommands\ShopCommands\ShopItemExecutor.cs" />
     <Compile Include="Commands\CustomCommands\SubscribeCommands\SubscribeExecutor.cs" />
     <Compile Include="Commands\CustomCommands\SubscribeCommands\UnSubscribeExecutor.cs" />
     <Compile Include="Commands\CustomCommands\UserExecutors\ProfileExecutor.cs" />
@@ -93,12 +95,13 @@
     <Compile Include="Bl\IReporter.cs" />
     <Compile Include="Bl\IUser.cs" />
     <Compile Include="Bl\Monitoring\MessageMonitoring.cs" />
-    <Compile Include="Homework\HomeWork.cs" />
     <Compile Include="Homework\HomeWorkHelper.cs" />
     <Compile Include="Json\JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bl\VkApiHelper.cs" />
     <Compile Include="Bl\VkBotSettings.cs" />
+    <Compile Include="Shop\ShopHelper.cs" />
+    <Compile Include="Shop\ShopItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

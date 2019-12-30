@@ -58,6 +58,7 @@ namespace Bot.Commands.CustomCommands.HomeWorksCommands
                         list.Add((Photo)a.Instance);
                     }
                 }
+                HomeWorkHelper.ClearData();
                 var homework = new JsonItem(text,sender.UserId,homeworkdate,VkMessage.Date.Value,list);
                 return HomeWorkExecutorHelper.AddHomeWork(homework,sender);
             }

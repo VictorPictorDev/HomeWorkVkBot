@@ -23,7 +23,7 @@ namespace Bot.Commands.CustomCommands.UserExecutors
             {
                 string resualt = $"Ваш VkID: {sender.UserId} \n";
                 resualt += $"Ваша привелегия: {sender.ToString()} \n";
-                resualt += $"Баланс: {sender.Coins} эмигриун\n";
+                resualt += $"Баланс: {sender.Coins} {Settings.Path.CoinName}\n";
                 resualt += $"Подписаны ли вы на рассылку домашних заданий: {sender.IsSubscribe}\n";
                 Api.SendMessage(resualt, sender.UserId);
                 return true;

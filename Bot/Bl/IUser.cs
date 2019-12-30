@@ -52,6 +52,7 @@ namespace Bot.Bl
             Permissions.Add("commandpermission.defualt.profile");
             Permissions.Add("commandpermission.defualt.subscribe");
             Permissions.Add("commandpermission.defualt.unsubscribe");
+            Permissions.Add("commandpermission.defualt.shop");
         }
 
         public override string ToString()
@@ -66,6 +67,7 @@ namespace Bot.Bl
             Permissions.Add("commandpermission.admin.addhomework");
             Permissions.Add("commandpermission.admin.edithomework");
             Permissions.Add("commandpermission.admin.deletehomework");
+            Permissions.Add("commandpermission.admin.shopitem");
         }
         public override string ToString()
         {
