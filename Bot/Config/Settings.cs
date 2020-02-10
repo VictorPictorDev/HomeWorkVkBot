@@ -14,8 +14,8 @@ namespace Bot.Config
         static Settings()
         {
             Bot = new BotSettings() { Token = "2e4f6bd8da7dd033b7a7513fa64232e24d2302161b5642b8b627cfddaea1d317cdfdb7146ea31bb9d8478", GroupId= 132813846 };
-            Db = new DbSettings() { TableName="Users",VkUserId="VkUserId",DataSource= @"(LocalDB)\MSSQLLocalDB", AttachDbFileName= @"D:\project\с#\HomeWorkBot\HomeWorkBot\Users.mdf" };
-            Path = new PathSettings() {HomeWorkPath= "Json/HomeWorks.json", DateFormat= "dd.MM.yyyy",ShopItemsPath="Json/ShopItems.json",CoinName= "эмигриуна" };
+            Db = new DbSettings() { TableName="Users",VkUserId="VkUserId",DataSource= @"(LocalDB)\MSSQLLocalDB", AttachDbFileName= @"D:\project\с#\Консольные проекты\HomeWorkBot\HomeWorkBot\Users.mdf" };
+            Path = new PathSettings() {HomeWorkPath= "Json/HomeWorks.json", DateFormat= "dd.MM.yyyy",ShopItemsPath="Json/ShopItems.json",CoinName= "эмигриуна",DistTime = new int[] {18,00 } };
         }
     }
     public class BotSettings
@@ -37,5 +37,6 @@ namespace Bot.Config
         public string ShopItemsPath;
         public string DateFormat;
         public string CoinName;
+        public int[] DistTime;
     }
 }

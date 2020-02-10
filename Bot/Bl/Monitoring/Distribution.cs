@@ -29,6 +29,45 @@ namespace Bot.Bl.Monitoring
             }
             return false;
         }
+        public bool SendAllSubscribers(string Text)
+        {
+            var Connection = DataBase.getInstance().Connection;
+            var query = new SqlCommand($"SELECT {Settings.Db.VkUserId} FROM {Settings.Db.TableName}", Connection);
+            try
+            {
+                Connection.Open();
+                using (SqlDataReader reader = query.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+
+                        while (reader.Read())
+                        {
+                            long userId = Convert.ToInt32(reader.GetValue(0));
+                            bool issubscribe = reader.GetBoolean(2);
+                            if (issubscribe)
+                            {
+                                ApiHelper.SendMessage(Text, userId);
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                    }
+                    reader.Close();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
         public bool SendAll(string Text)
         {
             var Connection = DataBase.getInstance().Connection;
